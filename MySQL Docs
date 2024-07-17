@@ -1,0 +1,56 @@
+create database school;
+
+use school;
+
+show tables;
+
+
+ DELIMITER // -> use to terminate the procedure
+  CREATE PROCEDURE Stored_Procedure_CreatingTable()
+   BEGIN
+      create table DemoTable
+      (
+      Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      UserFirstName varchar(20),
+      UserLastName varchar(20)
+      );
+   END;
+
+delimiter //
+create procedure CreateUserTable()
+begin
+create table if not exists users(user_id int auto_increment primary key,
+first_name varchar(10),
+last_name varchar(10),
+city varchar(10));
+insert into users(first_name,last_name,city)values('satej','patil','pune');
+insert into users(first_name,last_name,city)values('sahil','chavan','kolhapur');
+select * from users;
+end //
+
+delimiter //
+create procedure CountItems()
+begin
+declare count int default 0;
+select count(*) into count from users;
+select count;
+end //
+
+--- it coutn the total data in table --
+
+delimiter //
+create procedure SelectByLast(In l_name varchar(10))
+begin 
+select * from users where last_name=l_name;
+end //
+
+
+--- it gives data from last name ----
+
+
+
+to drop procedure use drop
+ drop procedure CountItems()//
+
+to list total procedure 
+show procedure status where db='school'//
